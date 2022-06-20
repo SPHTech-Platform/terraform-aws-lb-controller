@@ -19,7 +19,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.3.2"
+  default     = "1.4.2"
 }
 
 variable "chart_namespace" {
@@ -64,7 +64,7 @@ variable "prefer_ecr_repositories" {
 variable "image_tag" {
   description = "Image tag"
   type        = string
-  default     = "v2.3.0"
+  default     = "v2.4.2"
 }
 
 variable "name_override" {
@@ -86,9 +86,15 @@ variable "service_account_name" {
 }
 
 variable "service_account_annotations" {
-  description = "Addiitional Annotations for service account"
+  description = "Additional Annotations for service account"
   type        = map(string)
   default     = {}
+}
+
+variable "service_account_automount_token" {
+  description = "Whether, Automount API credentials for a Service Account."
+  type        = bool
+  default     = true
 }
 
 variable "pod_security_context" {
@@ -208,6 +214,12 @@ variable "ingress_class" {
   description = "The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb"
   type        = string
   default     = "alb"
+}
+
+variable "create_ingress_class_resource" {
+  description = " To use IngressClass resource instead of annotation, If specified as true, the IngressClass resource will be created."
+  type        = bool
+  default     = true
 }
 
 variable "region" {

@@ -24,6 +24,8 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ${service_account_name}
+  # Automount API credentials for a Service Account.
+  automountServiceAccountToken: true
 
 rbac:
   # Specifies whether rbac resources should be created
@@ -65,6 +67,15 @@ tolerations: ${tolerations}
 
 affinity: ${affinity}
 
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxSurge: 1
+  #   maxUnavailable: 1
+
+# serviceAnnotations contains annotations to be added to the provisioned webhook service resource
+serviceAnnotations: {}
+
 podAnnotations: ${pod_annotations}
 
 podLabels: ${pod_labels}
@@ -76,11 +87,34 @@ enableCertManager: ${enable_cert_manager}
 # ingresses without ingress class annotation and ingresses of type alb
 ingressClass: ${ingress_class}
 
+# ingressClassParams specify the IngressCLassParams that enforce settings for a set of Ingresses when using with ingress Controller.
+ingressClassParams:
+  create: true
+  # The name of ingressClassParams resource will be referred in ingressClass
+  name:
+  spec: {}
+    # You always can set specifications in `helm install` command through `--set` or `--set-string`
+    # If you do want to specify specifications in values.yaml, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'spec:'.
+    # namespaceSelector:
+    #   matchLabels:
+    # group:
+    # scheme:
+    # ipAddressType:
+    # tags:
+
+# To use IngressClass resource instead of annotation, before you need to install the IngressClass resource pointing to controller.
+# If specified as true, the IngressClass resource will be created.
+createIngressClassResource: ${create_ingress_class_resource}
+
 # The AWS region for the kubernetes cluster. Set to use KIAM or kube2iam for example.
 region: ${region}
 
 # The VPC ID for the Kubernetes cluster. Set this manually when your pods are unable to use the metadata service to determine this automatically
 vpcId: ${vpc_id}
+
+# Custom AWS API Endpoints (serviceID1=URL1,serviceID2=URL2)
+awsApiEndpoints:
 
 # Maximum retries for AWS APIs (default 10)
 awsMaxRetries: ${aws_max_retries}
@@ -109,17 +143,38 @@ metricsBindAddr: ${metrics_bind_addr}
 # The TCP port the Webhook server binds to. (default 9443)
 webhookBindPort: ${webhook_bind_port}
 
+# webhookTLS specifies TLS cert/key for the webhook
+webhookTLS:
+  caCert:
+  cert:
+  key:
+
+# keepTLSSecret specifies whether to reuse existing TLS secret for chart upgrade
+keepTLSSecret: true
+
 # Maximum number of concurrently running reconcile loops for service (default 3)
 serviceMaxConcurrentReconciles: ${service_max_concurrent_reconciles}
 
 # Maximum number of concurrently running reconcile loops for targetGroupBinding
 targetgroupbindingMaxConcurrentReconciles: ${targetgroupbinding_max_concurrent_reconciles}
 
+# Maximum duration of exponential backoff for targetGroupBinding reconcile failures
+targetgroupbindingMaxExponentialBackoffDelay:
+
 # Period at which the controller forces the repopulation of its local object stores. (default 1h0m0s)
 syncPeriod: ${sync_period}
 
 # Namespace the controller watches for updates to Kubernetes objects, If empty, all namespaces are watched.
 watchNamespace: ${watch_namespace}
+
+# disableIngressClassAnnotation disables the usage of kubernetes.io/ingress.class annotation, false by default
+disableIngressClassAnnotation:
+
+# disableIngressGroupNameAnnotation disables the usage of alb.ingress.kubernetes.io/group.name annotation, false by default
+disableIngressGroupNameAnnotation:
+
+# defaultSSLPolicy specifies the default SSL policy to use for TLS/HTTPS listeners
+defaultSSLPolicy:
 
 # Liveness probe configuration for the controller
 livenessProbe:
@@ -145,6 +200,13 @@ env: ${env}
 # recommended if using the Amazon VPC CNI plugin.
 hostNetwork: ${host_network}
 
+# Specifies the dnsPolicy that should be used for pods in the deployment
+#
+# This may need to be used to be changed given certain conditions. For instance, if one uses the cilium CNI
+# with certain settings, one may need to set `hostNetwork: true` and webhooks won't work unless `dnsPolicy`
+# is set to `ClusterFirstWithHostNet`. See https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+dnsPolicy:
+
 # extraVolumeMounts are the additional volume mounts. This enables setting up IRSA on non-EKS Kubernetes cluster
 extraVolumeMounts: ${extra_volume_mounts}
   # - name: aws-iam-token
@@ -167,5 +229,49 @@ defaultTags: ${default_tags}
   # default_tag1: value1
   # default_tag2: value2
 
+# podDisruptionBudget specifies the disruption budget for the controller pods.
+# Disruption budget will be configured only when the replicaCount is greater than 1
 podDisruptionBudget: ${pdb}
 #  maxUnavailable: 1
+
+# externalManagedTags is the list of tag keys on AWS resources that will be managed externally
+externalManagedTags: []
+
+# enableEndpointSlices enables k8s EndpointSlices for IP targets instead of Endpoints (default false)
+enableEndpointSlices:
+
+# enableBackendSecurityGroup enables shared security group for backend traffic (default true)
+enableBackendSecurityGroup:
+
+# backendSecurityGroup specifies backend security group id (default controller auto create backend security group)
+backendSecurityGroup:
+
+# disableRestrictedSecurityGroupRules specifies whether to disable creating port-range restricted security group rules for traffic
+disableRestrictedSecurityGroupRules:
+
+# objectSelector for webhook
+objectSelector:
+  matchExpressions:
+  # - key: <key>
+  #   operator: <operator>
+  #   values:
+  #   - <value>
+  matchLabels:
+  #   key: value
+
+serviceMonitor:
+  # Specifies whether a service monitor should be created
+  enabled: false
+  # Labels to add to the service account
+  additionalLabels: {}
+  # Prometheus scrape interval
+  interval: 1m
+
+# clusterSecretsPermissions lets you configure RBAC permissions for secret resources
+# Access to secrets resource is required only if you use the OIDC feature, and instead of
+# enabling access to all secrets, we recommend configuring namespaced role/rolebinding.
+# This option is for backwards compatibility only, and will potentially be deprecated in future.
+clusterSecretsPermissions:
+  # allowAllSecrets allows the controller to access all secrets in the cluster.
+  # This is to get backwards compatible behavior, but *NOT* recommended for security reasons
+  allowAllSecrets: false
