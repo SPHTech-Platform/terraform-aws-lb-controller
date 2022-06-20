@@ -25,7 +25,7 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ${service_account_name}
   # Automount API credentials for a Service Account.
-  automountServiceAccountToken: true
+  automountServiceAccountToken: ${service_account_automount_token}
 
 rbac:
   # Specifies whether rbac resources should be created
