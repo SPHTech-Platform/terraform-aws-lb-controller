@@ -20,6 +20,7 @@ locals {
       },
       var.service_account_annotations,
     ))
+    service_account_automount_token = var.service_account_automount_token
 
     pod_security_context             = jsonencode(var.pod_security_context)
     security_context                 = jsonencode(var.security_context)
@@ -43,6 +44,7 @@ locals {
 
     cluster_name                                 = var.cluster_name
     ingress_class                                = var.ingress_class
+    create_ingress_class_resource                = var.create_ingress_class_resource
     region                                       = var.region
     vpc_id                                       = var.vpc_id
     aws_max_retries                              = var.aws_max_retries
