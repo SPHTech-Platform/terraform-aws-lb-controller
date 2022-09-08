@@ -96,15 +96,6 @@ to a Kubernetes Cluster.
 | <a name="input_watch_namespace"></a> [watch\_namespace](#input\_watch\_namespace) | Watch a single namespace if specified, or all namespaces if not | `string` | `""` | no |
 | <a name="input_webhook_bind_port"></a> [webhook\_bind\_port](#input\_webhook\_bind\_port) | The TCP port the Webhook server binds to. (default 9443) | `number` | `9443` | no |
 
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
-| <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | Name of IAM role |
-| <a name="output_iam_role_path"></a> [iam\_role\_path](#output\_iam\_role\_path) | Path of IAM role |
-| <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Unique ID of IAM role |
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -144,7 +135,7 @@ to a Kubernetes Cluster.
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install the chart into | `string` | `"kube-system"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm repository for the chart | `string` | `"https://aws.github.io/eks-charts"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | Timeout to wait for the Chart to be deployed. | `number` | `300` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.3.2"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.4.4"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_cluster_tag_check"></a> [cluster\_tag\_check](#input\_cluster\_tag\_check) | Enable or disable subnet tag check | `bool` | `false` | no |
 | <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Default tags to apply to all AWS resources managed by this controller | `map(string)` | `{}` | no |
@@ -165,7 +156,7 @@ to a Kubernetes Cluster.
 | <a name="input_iam_role_policy"></a> [iam\_role\_policy](#input\_iam\_role\_policy) | Override the IAM policy for the controller | `string` | `""` | no |
 | <a name="input_iam_role_tags"></a> [iam\_role\_tags](#input\_iam\_role\_tags) | Tags for IAM Role for controller | `map(string)` | `{}` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.3.0"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.4.3"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
 | <a name="input_ingress_max_concurrent_reconciles"></a> [ingress\_max\_concurrent\_reconciles](#input\_ingress\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for ingress (default 3) | `number` | `3` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Log level. Either `info` or `debug` | `string` | `"info"` | no |
