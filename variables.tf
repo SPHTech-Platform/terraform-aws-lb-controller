@@ -326,32 +326,3 @@ variable "iam_role_name" {
   default     = ""
 }
 
-variable "iam_role_description" {
-  description = "Description for IAM role for controller"
-  type        = string
-  default     = "Used by AWS Load Balancer Controller for EKS"
-}
-
-variable "iam_role_path" {
-  description = "IAM Role path for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_permission_boundary" {
-  description = "Permission boundary ARN for IAM Role for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_tags" {
-  description = "Tags for IAM Role for controller"
-  type        = map(string)
-  default     = {}
-}
-
-variable "iam_role_policy" {
-  description = "Override the IAM policy for the controller"
-  type        = string
-  default     = ""
-}

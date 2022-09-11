@@ -57,12 +57,7 @@ to a Kubernetes Cluster.
 | <a name="input_extra_volumes"></a> [extra\_volumes](#input\_extra\_volumes) | Extra volumes | `list(any)` | `[]` | no |
 | <a name="input_fullname_override"></a> [fullname\_override](#input\_fullname\_override) | Full name override for resources | `string` | `""` | no |
 | <a name="input_host_network"></a> [host\_network](#input\_host\_network) | Use Host Network for pod | `bool` | `false` | no |
-| <a name="input_iam_role_description"></a> [iam\_role\_description](#input\_iam\_role\_description) | Description for IAM role for controller | `string` | `"Used by AWS Load Balancer Controller for EKS"` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of IAM role for controller | `string` | `""` | no |
-| <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path) | IAM Role path for controller | `string` | `""` | no |
-| <a name="input_iam_role_permission_boundary"></a> [iam\_role\_permission\_boundary](#input\_iam\_role\_permission\_boundary) | Permission boundary ARN for IAM Role for controller | `string` | `""` | no |
-| <a name="input_iam_role_policy"></a> [iam\_role\_policy](#input\_iam\_role\_policy) | Override the IAM policy for the controller | `string` | `""` | no |
-| <a name="input_iam_role_tags"></a> [iam\_role\_tags](#input\_iam\_role\_tags) | Tags for IAM Role for controller | `map(string)` | `{}` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
 | <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.4.3"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
