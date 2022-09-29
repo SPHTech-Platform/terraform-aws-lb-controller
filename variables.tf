@@ -19,7 +19,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.3.2"
+  default     = "1.4.4"
 }
 
 variable "chart_namespace" {
@@ -64,7 +64,7 @@ variable "prefer_ecr_repositories" {
 variable "image_tag" {
   description = "Image tag"
   type        = string
-  default     = "v2.3.0"
+  default     = "v2.4.3"
 }
 
 variable "name_override" {
@@ -204,6 +204,12 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "cluster_tag_check" {
+  description = "Enable or disable subnet tag check"
+  type        = bool
+  default     = false
+}
+
 variable "ingress_class" {
   description = "The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb"
   type        = string
@@ -316,36 +322,6 @@ variable "oidc_provider_arn" {
 
 variable "iam_role_name" {
   description = "Name of IAM role for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_description" {
-  description = "Description for IAM role for controller"
-  type        = string
-  default     = "Used by AWS Load Balancer Controller for EKS"
-}
-
-variable "iam_role_path" {
-  description = "IAM Role path for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_permission_boundary" {
-  description = "Permission boundary ARN for IAM Role for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_tags" {
-  description = "Tags for IAM Role for controller"
-  type        = map(string)
-  default     = {}
-}
-
-variable "iam_role_policy" {
-  description = "Override the IAM policy for the controller"
   type        = string
   default     = ""
 }
