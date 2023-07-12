@@ -64,7 +64,7 @@ variable "prefer_ecr_repositories" {
 variable "image_tag" {
   description = "Image tag"
   type        = string
-  default     = "v2.4.3"
+  default     = "v2.5.3"
 }
 
 variable "name_override" {
