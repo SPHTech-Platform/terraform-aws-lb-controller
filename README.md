@@ -59,7 +59,7 @@ to a Kubernetes Cluster.
 | <a name="input_host_network"></a> [host\_network](#input\_host\_network) | Use Host Network for pod | `bool` | `false` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of IAM role for controller | `string` | `""` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.4.3"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.5.3"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
 | <a name="input_ingress_max_concurrent_reconciles"></a> [ingress\_max\_concurrent\_reconciles](#input\_ingress\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for ingress (default 3) | `number` | `3` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Log level. Either `info` or `debug` | `string` | `"info"` | no |
