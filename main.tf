@@ -60,6 +60,7 @@ locals {
     sync_period                                  = var.sync_period
     watch_namespace                              = var.watch_namespace
     default_tags                                 = jsonencode(var.default_tags)
+    enable_service_mutator_webhook               = var.enable_service_mutator_webhook
   }
 
   # See releases at https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases
