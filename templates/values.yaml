@@ -326,10 +326,10 @@ backendSecurityGroup:
 # disableRestrictedSecurityGroupRules specifies whether to disable creating port-range restricted security group rules for traffic
 disableRestrictedSecurityGroupRules:
 
-# tolerateNonExistentBackendService permits rules which specify backend services that don't exist, true by default
+# tolerateNonExistentBackendService permits rules which specify backend services that don't exist, true by default (When enabled, it will return 503 error if backend service not exist)
 tolerateNonExistentBackendService:
 
-# tolerateNonExistentBackendAction permits rules which specify backend actions that don't exist, true by default
+# tolerateNonExistentBackendAction permits rules which specify backend actions that don't exist, true by default (When enabled, it will return 503 error if backend action not exist)
 tolerateNonExistentBackendAction:
 
 # controllerConfig specifies controller configuration
@@ -344,6 +344,7 @@ controllerConfig:
   # EnableIPTargetType: true
   SubnetsClusterTagCheck: ${cluster_tag_check}
   # NLBHealthCheckAdvancedConfig: true
+  # ALBSingleSubnet: false
 
 # objectSelector for webhook
 objectSelector:
