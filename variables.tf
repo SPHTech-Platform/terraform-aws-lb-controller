@@ -218,7 +218,7 @@ variable "autoscaling" {
   description = "Autoscaling configuration"
   type        = any
   default = {
-    enabled                        = false
+    enabled                        = true
     minReplicas                    = 1
     maxReplicas                    = 5
     targetCPUUtilizationPercentage = 80
