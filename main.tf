@@ -11,7 +11,7 @@ locals {
     replicas = var.replicas
 
     revision_history_limit = var.revision_history_limit
-    
+
     image_repository = var.prefer_ecr_repositories ? lookup(local.image_base, data.aws_region.current.name, var.image_repository) : var.image_repository
     image_tag        = var.image_tag
 
@@ -63,6 +63,8 @@ locals {
     watch_namespace                              = var.watch_namespace
     default_tags                                 = jsonencode(var.default_tags)
     enable_service_mutator_webhook               = var.enable_service_mutator_webhook
+
+    autoscaling = jsonencode(var.autoscaling)
   }
 
   # See releases at https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases

@@ -324,6 +324,17 @@ variable "revision_history_limit" {
   default     = 10
 }
 
+variable "autoscaling" {
+  description = "Autoscaling configuration"
+  type        = map(any)
+  default = {
+    enabled                        = false
+    minReplicas                    = 1
+    maxReplicas                    = 5
+    targetCPUUtilizationPercentage = 80
+  }
+}
+
 ########################
 # IAM Role
 ########################
