@@ -38,17 +38,19 @@ to a Kubernetes Cluster.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_affinity"></a> [affinity](#input\_affinity) | Pod affinity | `map(any)` | `{}` | no |
+| <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | Autoscaling configuration | `any` | <pre>{<br>  "enabled": false,<br>  "maxReplicas": 5,<br>  "minReplicas": 1,<br>  "targetCPUUtilizationPercentage": 80<br>}</pre> | no |
 | <a name="input_aws_max_retries"></a> [aws\_max\_retries](#input\_aws\_max\_retries) | Maximum retries for AWS APIs (default 10) | `number` | `10` | no |
 | <a name="input_chart_name"></a> [chart\_name](#input\_chart\_name) | Helm chart name to provision | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install the chart into | `string` | `"kube-system"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm repository for the chart | `string` | `"https://aws.github.io/eks-charts"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | Timeout to wait for the Chart to be deployed. | `number` | `300` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.5.4"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.8.0"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_cluster_tag_check"></a> [cluster\_tag\_check](#input\_cluster\_tag\_check) | Enable or disable subnet tag check | `bool` | `false` | no |
 | <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Default tags to apply to all AWS resources managed by this controller | `map(string)` | `{}` | no |
 | <a name="input_enable_cert_manager"></a> [enable\_cert\_manager](#input\_enable\_cert\_manager) | Enable cert-manager injection of webhook certficates | `bool` | `false` | no |
 | <a name="input_enable_pod_readiness_gate_inject"></a> [enable\_pod\_readiness\_gate\_inject](#input\_enable\_pod\_readiness\_gate\_inject) | If enabled, targetHealth readiness gate will get injected to the pod spec for the matching endpoint pods (default true) | `bool` | `true` | no |
+| <a name="input_enable_service_mutator_webhook"></a> [enable\_service\_mutator\_webhook](#input\_enable\_service\_mutator\_webhook) | Enable the service mutator webhook | `bool` | `true` | no |
 | <a name="input_enable_shield"></a> [enable\_shield](#input\_enable\_shield) | Enable Shield addon for ALB (default true) | `bool` | `true` | no |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | Enable WAF addon for ALB (default true) | `bool` | `true` | no |
 | <a name="input_enable_wafv2"></a> [enable\_wafv2](#input\_enable\_wafv2) | Enable WAF V2 addon for ALB (default true) | `bool` | `true` | no |
@@ -59,9 +61,10 @@ to a Kubernetes Cluster.
 | <a name="input_host_network"></a> [host\_network](#input\_host\_network) | Use Host Network for pod | `bool` | `false` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of IAM role for controller | `string` | `""` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.5.3"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.8.0"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
 | <a name="input_ingress_max_concurrent_reconciles"></a> [ingress\_max\_concurrent\_reconciles](#input\_ingress\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for ingress (default 3) | `number` | `3` | no |
+| <a name="input_load_balancer_class"></a> [load\_balancer\_class](#input\_load\_balancer\_class) | Specifies the class of load balancer to use for services. This affects how services are provisioned if type LoadBalancer is used (default service.k8s.aws/nlb) | `string` | `""` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Log level. Either `info` or `debug` | `string` | `"info"` | no |
 | <a name="input_max_history"></a> [max\_history](#input\_max\_history) | Max History for Helm | `number` | `20` | no |
 | <a name="input_metrics_bind_addr"></a> [metrics\_bind\_addr](#input\_metrics\_bind\_addr) | The address the metric endpoint binds to. (default ':8080') | `string` | `":8080"` | no |
@@ -77,10 +80,14 @@ to a Kubernetes Cluster.
 | <a name="input_release_name"></a> [release\_name](#input\_release\_name) | Helm release name | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | Number of replicas | `number` | `1` | no |
 | <a name="input_resources"></a> [resources](#input\_resources) | Pod Resources | `map(any)` | <pre>{<br>  "limits": {<br>    "cpu": "200m",<br>    "memory": "500Mi"<br>  },<br>  "requests": {<br>    "cpu": "100m",<br>    "memory": "500Mi"<br>  }<br>}</pre> | no |
+| <a name="input_revision_history_limit"></a> [revision\_history\_limit](#input\_revision\_history\_limit) | The number of old history to retain to allow rollback. Set to 0 to disable | `number` | `10` | no |
+| <a name="input_runtime_class_name"></a> [runtime\_class\_name](#input\_runtime\_class\_name) | Runtime class name for the controller | `string` | `""` | no |
 | <a name="input_security_context"></a> [security\_context](#input\_security\_context) | Security Context for container | `map(any)` | <pre>{<br>  "allowPrivilegeEscalation": false,<br>  "readOnlyRootFilesystem": true,<br>  "runAsNonRoot": true<br>}</pre> | no |
 | <a name="input_service_account_annotations"></a> [service\_account\_annotations](#input\_service\_account\_annotations) | Addiitional Annotations for service account | `map(string)` | `{}` | no |
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of service account to create. Not generated | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_service_max_concurrent_reconciles"></a> [service\_max\_concurrent\_reconciles](#input\_service\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for service (default 3) | `number` | `3` | no |
+| <a name="input_service_mutator_webhook_config"></a> [service\_mutator\_webhook\_config](#input\_service\_mutator\_webhook\_config) | Service Mutator Webhook Configuration | `any` | <pre>{<br>  "failurePolicy": "Fail",<br>  "objectSelector": {<br>    "matchExpressions": [],<br>    "matchLabels": {},<br>    "operations": [<br>      "CREATE"<br>    ]<br>  }<br>}</pre> | no |
+| <a name="input_service_target_eni_sg_tags"></a> [service\_target\_eni\_sg\_tags](#input\_service\_target\_eni\_sg\_tags) | Tags to apply to the security group created for the service target group | `map(string)` | `{}` | no |
 | <a name="input_sync_period"></a> [sync\_period](#input\_sync\_period) | Period at which the controller forces the repopulation of its local object stores. (default 1h0m0s) | `string` | `"1h0m0s"` | no |
 | <a name="input_targetgroupbinding_max_concurrent_reconciles"></a> [targetgroupbinding\_max\_concurrent\_reconciles](#input\_targetgroupbinding\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for targetGroupBinding | `number` | `3` | no |
 | <a name="input_termination_grace_period_seconds"></a> [termination\_grace\_period\_seconds](#input\_termination\_grace\_period\_seconds) | Time period for the controller pod to do a graceful shutdown | `number` | `10` | no |
