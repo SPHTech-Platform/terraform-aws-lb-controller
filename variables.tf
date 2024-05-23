@@ -19,7 +19,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.5.4"
+  default     = "1.8.0"
 }
 
 variable "chart_namespace" {
@@ -64,7 +64,7 @@ variable "prefer_ecr_repositories" {
 variable "image_tag" {
   description = "Image tag"
   type        = string
-  default     = "v2.5.3"
+  default     = "v2.8.0"
 }
 
 variable "name_override" {
@@ -75,6 +75,12 @@ variable "name_override" {
 
 variable "fullname_override" {
   description = "Full name override for resources"
+  type        = string
+  default     = ""
+}
+
+variable "runtime_class_name" {
+  description = "Runtime class name for the controller"
   type        = string
   default     = ""
 }
@@ -196,6 +202,56 @@ variable "enable_cert_manager" {
   default     = false
 }
 
+variable "enable_service_mutator_webhook" {
+  description = "Enable the service mutator webhook"
+  type        = bool
+  default     = true
+}
+
+variable "revision_history_limit" {
+  description = "The number of old history to retain to allow rollback. Set to 0 to disable"
+  type        = number
+  default     = 10
+}
+
+variable "autoscaling" {
+  description = "Autoscaling configuration"
+  type        = any
+  default = {
+    enabled                        = false
+    minReplicas                    = 1
+    maxReplicas                    = 5
+    targetCPUUtilizationPercentage = 80
+  }
+}
+
+variable "service_mutator_webhook_config" {
+  description = "Service Mutator Webhook Configuration"
+  type        = any
+  default = {
+    failurePolicy = "Fail"
+    objectSelector = {
+      matchExpressions = []
+      matchLabels      = {}
+      operations = [
+        "CREATE"
+      ]
+    }
+  }
+}
+
+variable "service_target_eni_sg_tags" {
+  description = "Tags to apply to the security group created for the service target group"
+  type        = map(string)
+  default     = {}
+
+}
+variable "load_balancer_class" {
+  description = "Specifies the class of load balancer to use for services. This affects how services are provisioned if type LoadBalancer is used (default service.k8s.aws/nlb)"
+  type        = string
+  default     = ""
+}
+
 ########################
 # Controller Settings
 ########################
@@ -310,29 +366,6 @@ variable "default_tags" {
   description = "Default tags to apply to all AWS resources managed by this controller"
   type        = map(string)
   default     = {}
-}
-
-variable "enable_service_mutator_webhook" {
-  description = "Enable the service mutator webhook"
-  type        = bool
-  default     = true
-}
-
-variable "revision_history_limit" {
-  description = "The number of old history to retain to allow rollback. Set to 0 to disable"
-  type        = number
-  default     = 10
-}
-
-variable "autoscaling" {
-  description = "Autoscaling configuration"
-  type        = map(any)
-  default = {
-    enabled                        = false
-    minReplicas                    = 1
-    maxReplicas                    = 5
-    targetCPUUtilizationPercentage = 80
-  }
 }
 
 ########################

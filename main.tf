@@ -5,8 +5,9 @@ locals {
   service_account_name = var.service_account_name
 
   values = {
-    name_override     = var.name_override
-    fullname_override = var.fullname_override
+    name_override      = var.name_override
+    fullname_override  = var.fullname_override
+    runtime_class_name = var.runtime_class_name
 
     replicas = var.replicas
 
@@ -63,8 +64,10 @@ locals {
     watch_namespace                              = var.watch_namespace
     default_tags                                 = jsonencode(var.default_tags)
     enable_service_mutator_webhook               = var.enable_service_mutator_webhook
-
-    autoscaling = jsonencode(var.autoscaling)
+    autoscaling                                  = jsonencode(var.autoscaling)
+    service_mutator_webhook_config               = jsonencode(var.service_mutator_webhook_config)
+    service_target_eni_sg_tags                   = jsonencode(var.service_target_eni_sg_tags)
+    load_balancer_class                          = var.load_balancer_class
   }
 
   # See releases at https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases
