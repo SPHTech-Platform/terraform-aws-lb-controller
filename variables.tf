@@ -312,6 +312,18 @@ variable "default_tags" {
   default     = {}
 }
 
+variable "enable_service_mutator_webhook" {
+  description = "Enable the service mutator webhook"
+  type        = bool
+  default     = true
+}
+
+variable "revision_history_limit" {
+  description = "The number of old history to retain to allow rollback. Set to 0 to disable"
+  type        = number
+  default     = 10
+}
+
 ########################
 # IAM Role
 ########################
@@ -324,10 +336,4 @@ variable "iam_role_name" {
   description = "Name of IAM role for controller"
   type        = string
   default     = ""
-}
-
-variable "enable_service_mutator_webhook" {
-  description = "Enable the service mutator webhook"
-  type        = bool
-  default     = true
 }

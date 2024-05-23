@@ -10,6 +10,8 @@ locals {
 
     replicas = var.replicas
 
+    revision_history_limit = var.revision_history_limit
+    
     image_repository = var.prefer_ecr_repositories ? lookup(local.image_base, data.aws_region.current.name, var.image_repository) : var.image_repository
     image_tag        = var.image_tag
 
