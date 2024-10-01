@@ -274,7 +274,7 @@ env: ${env}
   # ENV_2: ""
 
 # Use envFrom to set environment variables from a Secret or ConfigMap
-envFrom: 
+envFrom:
   # valueFrom:
   #   - secretKeyRef:
   #       name: aws-load-balancer-controller

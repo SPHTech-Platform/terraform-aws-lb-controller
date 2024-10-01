@@ -24,7 +24,7 @@ to a Kubernetes Cluster.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_lb_controller_role"></a> [lb\_controller\_role](#module\_lb\_controller\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.27.0 |
+| <a name="module_lb_controller_role"></a> [lb\_controller\_role](#module\_lb\_controller\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.39.0 |
 
 ## Resources
 
@@ -38,13 +38,13 @@ to a Kubernetes Cluster.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_affinity"></a> [affinity](#input\_affinity) | Pod affinity | `map(any)` | `{}` | no |
-| <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | Autoscaling configuration | `any` | <pre>{<br>  "enabled": false,<br>  "maxReplicas": 5,<br>  "minReplicas": 1,<br>  "targetCPUUtilizationPercentage": 80<br>}</pre> | no |
+| <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | Autoscaling configuration | `any` | <pre>{<br>  "enabled": true,<br>  "maxReplicas": 5,<br>  "minReplicas": 1,<br>  "targetCPUUtilizationPercentage": 80<br>}</pre> | no |
 | <a name="input_aws_max_retries"></a> [aws\_max\_retries](#input\_aws\_max\_retries) | Maximum retries for AWS APIs (default 10) | `number` | `10` | no |
 | <a name="input_chart_name"></a> [chart\_name](#input\_chart\_name) | Helm chart name to provision | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install the chart into | `string` | `"kube-system"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm repository for the chart | `string` | `"https://aws.github.io/eks-charts"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | Timeout to wait for the Chart to be deployed. | `number` | `300` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.8.0"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.8.4"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_cluster_tag_check"></a> [cluster\_tag\_check](#input\_cluster\_tag\_check) | Enable or disable subnet tag check | `bool` | `false` | no |
 | <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Default tags to apply to all AWS resources managed by this controller | `map(string)` | `{}` | no |
@@ -61,7 +61,7 @@ to a Kubernetes Cluster.
 | <a name="input_host_network"></a> [host\_network](#input\_host\_network) | Use Host Network for pod | `bool` | `false` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of IAM role for controller | `string` | `""` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.8.0"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.8.3"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
 | <a name="input_ingress_max_concurrent_reconciles"></a> [ingress\_max\_concurrent\_reconciles](#input\_ingress\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for ingress (default 3) | `number` | `3` | no |
 | <a name="input_load_balancer_class"></a> [load\_balancer\_class](#input\_load\_balancer\_class) | Specifies the class of load balancer to use for services. This affects how services are provisioned if type LoadBalancer is used (default service.k8s.aws/nlb) | `string` | `""` | no |
