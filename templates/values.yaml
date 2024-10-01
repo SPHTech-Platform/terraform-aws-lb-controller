@@ -273,6 +273,12 @@ env: ${env}
   # ENV_1: ""
   # ENV_2: ""
 
+# Use envFrom to set environment variables from a Secret or ConfigMap
+envFrom:
+  # valueFrom:
+  #   - secretKeyRef:
+  #       name: aws-load-balancer-controller
+
 # Use Environment variables credentials from Secret (aws-secret) for aws-load-balancer-controller pod similarly as The EBS CSI Driver does.
 # envSecretName: aws-secret
 
