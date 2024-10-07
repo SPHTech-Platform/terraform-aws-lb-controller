@@ -24,6 +24,7 @@ to a Kubernetes Cluster.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_crds"></a> [crds](#module\_crds) | rpadovani/helm-crds/kubectl | ~> 0.3.0 |
 | <a name="module_lb_controller_role"></a> [lb\_controller\_role](#module\_lb\_controller\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.39.0 |
 
 ## Resources

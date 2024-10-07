@@ -100,6 +100,15 @@ locals {
   }
 }
 
+module "crds" {
+  source  = "rpadovani/helm-crds/kubectl"
+  version = "~> 0.3.0"
+
+  crds_urls = [
+    "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/tags/${var.image_tag}/helm/aws-load-balancer-controller/crds/crds.yaml",
+  ]
+}
+
 resource "helm_release" "release" {
   name       = var.release_name
   chart      = var.chart_name
@@ -110,7 +119,11 @@ resource "helm_release" "release" {
   max_history = var.max_history
   timeout     = var.chart_timeout
 
+  skip_crds = true # CRDs are manages by module.crds
+
   values = [
     templatefile("${path.module}/templates/values.yaml", local.values),
   ]
+
+  depends_on = [module.crds]
 }
