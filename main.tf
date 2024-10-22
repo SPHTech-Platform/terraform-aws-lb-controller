@@ -102,7 +102,7 @@ locals {
 
 module "crds" {
   source  = "rpadovani/helm-crds/kubectl"
-  version = "~> 0.3.0"
+  version = ">= 1.0"
 
   crds_urls = [
     "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/tags/${var.image_tag}/helm/aws-load-balancer-controller/crds/crds.yaml",
