@@ -1,6 +1,6 @@
 module "lb_controller_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.39.0"
+  version = "~> 5.59.0"
 
   role_name_prefix = coalesce(var.iam_role_name, "${var.cluster_name}-lb-")
   role_description = "EKS Cluster ${var.cluster_name} LoadBalancer Controller"
