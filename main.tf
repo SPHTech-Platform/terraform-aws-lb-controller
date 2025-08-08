@@ -105,7 +105,8 @@ module "crds" {
   version = ">= 1.0"
 
   crds_urls = [
-    "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/tags/${var.image_tag}/helm/aws-load-balancer-controller/crds/crds.yaml",
+    "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/heads/main/helm/aws-load-balancer-controller/crds/crds.yaml",
+    "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/heads/main/helm/aws-load-balancer-controller/crds/gateway-crds.yaml",
   ]
 }
 
