@@ -13,3 +13,13 @@ module "lb_controller_role" {
     }
   }
 }
+
+moved {
+  from = module.lb_controller_role.aws_iam_policy.load_balancer_controller[0]
+  to   = module.lb_controller_role.aws_iam_policy.this[0]
+}
+
+moved {
+  from = module.lb_controller_role.aws_iam_role_policy_attachment.load_balancer_controller[0]
+  to   = module.lb_controller_role.aws_iam_role_policy_attachment.this[0]
+}
