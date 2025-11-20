@@ -9,23 +9,23 @@ to a Kubernetes Cluster.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 2.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_crds"></a> [crds](#module\_crds) | rpadovani/helm-crds/kubectl | ~> 0.3.0 |
-| <a name="module_lb_controller_role"></a> [lb\_controller\_role](#module\_lb\_controller\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.39.0 |
+| <a name="module_crds"></a> [crds](#module\_crds) | rpadovani/helm-crds/kubectl | >= 1.0 |
+| <a name="module_lb_controller_role"></a> [lb\_controller\_role](#module\_lb\_controller\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts | ~> 6.0 |
 
 ## Resources
 
@@ -39,13 +39,13 @@ to a Kubernetes Cluster.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_affinity"></a> [affinity](#input\_affinity) | Pod affinity | `map(any)` | `{}` | no |
-| <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | Autoscaling configuration | `any` | <pre>{<br>  "enabled": true,<br>  "maxReplicas": 5,<br>  "minReplicas": 1,<br>  "targetCPUUtilizationPercentage": 80<br>}</pre> | no |
+| <a name="input_autoscaling"></a> [autoscaling](#input\_autoscaling) | Autoscaling configuration | `any` | <pre>{<br/>  "enabled": true,<br/>  "maxReplicas": 5,<br/>  "minReplicas": 1,<br/>  "targetCPUUtilizationPercentage": 80<br/>}</pre> | no |
 | <a name="input_aws_max_retries"></a> [aws\_max\_retries](#input\_aws\_max\_retries) | Maximum retries for AWS APIs (default 10) | `number` | `10` | no |
 | <a name="input_chart_name"></a> [chart\_name](#input\_chart\_name) | Helm chart name to provision | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install the chart into | `string` | `"kube-system"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm repository for the chart | `string` | `"https://aws.github.io/eks-charts"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | Timeout to wait for the Chart to be deployed. | `number` | `300` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.8.4"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.15.0"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_cluster_tag_check"></a> [cluster\_tag\_check](#input\_cluster\_tag\_check) | Enable or disable subnet tag check | `bool` | `false` | no |
 | <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Default tags to apply to all AWS resources managed by this controller | `map(string)` | `{}` | no |
@@ -62,7 +62,7 @@ to a Kubernetes Cluster.
 | <a name="input_host_network"></a> [host\_network](#input\_host\_network) | Use Host Network for pod | `bool` | `false` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of IAM role for controller | `string` | `""` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | Image repository on Dockerhub | `string` | `"amazon/aws-alb-ingress-controller"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.8.3"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag | `string` | `"v2.15.0"` | no |
 | <a name="input_ingress_class"></a> [ingress\_class](#input\_ingress\_class) | The ingress class this controller will satisfy. If not specified, controller will match all ingresses without ingress class annotation and ingresses of type alb | `string` | `"alb"` | no |
 | <a name="input_ingress_max_concurrent_reconciles"></a> [ingress\_max\_concurrent\_reconciles](#input\_ingress\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for ingress (default 3) | `number` | `3` | no |
 | <a name="input_load_balancer_class"></a> [load\_balancer\_class](#input\_load\_balancer\_class) | Specifies the class of load balancer to use for services. This affects how services are provisioned if type LoadBalancer is used (default service.k8s.aws/nlb) | `string` | `""` | no |
@@ -74,20 +74,20 @@ to a Kubernetes Cluster.
 | <a name="input_pdb"></a> [pdb](#input\_pdb) | PDB for pod | `map(any)` | `{}` | no |
 | <a name="input_pod_annotations"></a> [pod\_annotations](#input\_pod\_annotations) | Additional annotations on a pod | `map(string)` | `{}` | no |
 | <a name="input_pod_labels"></a> [pod\_labels](#input\_pod\_labels) | Additional labels on a pod | `map(string)` | `{}` | no |
-| <a name="input_pod_security_context"></a> [pod\_security\_context](#input\_pod\_security\_context) | Pod Security Context | `map(any)` | <pre>{<br>  "fsGroup": 65534<br>}</pre> | no |
+| <a name="input_pod_security_context"></a> [pod\_security\_context](#input\_pod\_security\_context) | Pod Security Context | `map(any)` | <pre>{<br/>  "fsGroup": 65534<br/>}</pre> | no |
 | <a name="input_prefer_ecr_repositories"></a> [prefer\_ecr\_repositories](#input\_prefer\_ecr\_repositories) | Prefer ECR repositories according to the region. If none can be found, `var.image_repository` is used | `bool` | `true` | no |
 | <a name="input_priority_class_name"></a> [priority\_class\_name](#input\_priority\_class\_name) | Priority class for pod | `string` | `"system-cluster-critical"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region for the kubernetes cluster. Set to use KIAM or kube2iam for example. | `string` | `""` | no |
 | <a name="input_release_name"></a> [release\_name](#input\_release\_name) | Helm release name | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | Number of replicas | `number` | `1` | no |
-| <a name="input_resources"></a> [resources](#input\_resources) | Pod Resources | `map(any)` | <pre>{<br>  "limits": {<br>    "cpu": "200m",<br>    "memory": "500Mi"<br>  },<br>  "requests": {<br>    "cpu": "100m",<br>    "memory": "500Mi"<br>  }<br>}</pre> | no |
+| <a name="input_resources"></a> [resources](#input\_resources) | Pod Resources | `map(any)` | <pre>{<br/>  "limits": {<br/>    "cpu": "200m",<br/>    "memory": "500Mi"<br/>  },<br/>  "requests": {<br/>    "cpu": "100m",<br/>    "memory": "500Mi"<br/>  }<br/>}</pre> | no |
 | <a name="input_revision_history_limit"></a> [revision\_history\_limit](#input\_revision\_history\_limit) | The number of old history to retain to allow rollback. Set to 0 to disable | `number` | `10` | no |
 | <a name="input_runtime_class_name"></a> [runtime\_class\_name](#input\_runtime\_class\_name) | Runtime class name for the controller | `string` | `""` | no |
-| <a name="input_security_context"></a> [security\_context](#input\_security\_context) | Security Context for container | `map(any)` | <pre>{<br>  "allowPrivilegeEscalation": false,<br>  "readOnlyRootFilesystem": true,<br>  "runAsNonRoot": true<br>}</pre> | no |
+| <a name="input_security_context"></a> [security\_context](#input\_security\_context) | Security Context for container | `map(any)` | <pre>{<br/>  "allowPrivilegeEscalation": false,<br/>  "readOnlyRootFilesystem": true,<br/>  "runAsNonRoot": true<br/>}</pre> | no |
 | <a name="input_service_account_annotations"></a> [service\_account\_annotations](#input\_service\_account\_annotations) | Addiitional Annotations for service account | `map(string)` | `{}` | no |
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of service account to create. Not generated | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_service_max_concurrent_reconciles"></a> [service\_max\_concurrent\_reconciles](#input\_service\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for service (default 3) | `number` | `3` | no |
-| <a name="input_service_mutator_webhook_config"></a> [service\_mutator\_webhook\_config](#input\_service\_mutator\_webhook\_config) | Service Mutator Webhook Configuration | `any` | <pre>{<br>  "failurePolicy": "Fail",<br>  "objectSelector": {<br>    "matchExpressions": [],<br>    "matchLabels": {},<br>    "operations": [<br>      "CREATE"<br>    ]<br>  }<br>}</pre> | no |
+| <a name="input_service_mutator_webhook_config"></a> [service\_mutator\_webhook\_config](#input\_service\_mutator\_webhook\_config) | Service Mutator Webhook Configuration | `any` | <pre>{<br/>  "failurePolicy": "Fail",<br/>  "objectSelector": {<br/>    "matchExpressions": [],<br/>    "matchLabels": {},<br/>    "operations": [<br/>      "CREATE"<br/>    ]<br/>  }<br/>}</pre> | no |
 | <a name="input_service_target_eni_sg_tags"></a> [service\_target\_eni\_sg\_tags](#input\_service\_target\_eni\_sg\_tags) | Tags to apply to the security group created for the service target group | `map(string)` | `{}` | no |
 | <a name="input_sync_period"></a> [sync\_period](#input\_sync\_period) | Period at which the controller forces the repopulation of its local object stores. (default 1h0m0s) | `string` | `"1h0m0s"` | no |
 | <a name="input_targetgroupbinding_max_concurrent_reconciles"></a> [targetgroupbinding\_max\_concurrent\_reconciles](#input\_targetgroupbinding\_max\_concurrent\_reconciles) | Maximum number of concurrently running reconcile loops for targetGroupBinding | `number` | `3` | no |

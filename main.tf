@@ -13,13 +13,13 @@ locals {
 
     revision_history_limit = var.revision_history_limit
 
-    image_repository = var.prefer_ecr_repositories ? lookup(local.image_base, data.aws_region.current.name, var.image_repository) : var.image_repository
+    image_repository = var.prefer_ecr_repositories ? lookup(local.image_base, data.aws_region.current.region, var.image_repository) : var.image_repository
     image_tag        = var.image_tag
 
     service_account_name = var.service_account_name
     service_account_annotations = jsonencode(merge(
       {
-        "eks.amazonaws.com/role-arn" = module.lb_controller_role.iam_role_arn
+        "eks.amazonaws.com/role-arn" = module.lb_controller_role.arn
       },
       var.service_account_annotations,
     ))
